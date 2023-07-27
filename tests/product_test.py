@@ -8,14 +8,15 @@ import requests
 #     response = requests.get(url)
 #     data = response.json()
 #     products = data["products"]
+#     responseCode = data["responseCode"]
 #     for product in products:
 #         print(product["name"])
 #         print(product["price"])
 #         assert len(product["name"]) != 0
 #         assert len(product["price"]) != 0
 #     # print(products)
-#     assert response.status_code == 200
-#
+#     assert responseCode == 200
+
 # def test_product1():
 #     url = "https://automationexercise.com/api/productsList"
 #     response = requests.post(url)
@@ -175,38 +176,119 @@ import requests
 #     assert responseCode == 200
 #     assert responseMessage == expected_message
 
-def test_GetUserDetails():
-    params = {'email': 'viktoriaaaaa.f@gmail.com'}
-    url = "https://automationexercise.com/api/getUserDetailByEmail"
-    response = requests.get(url, params=params)
+# def test_GetUserDetails():
+#     params = {'email': 'viktoriaaaaa.f@gmail.com'}
+#     url = "https://automationexercise.com/api/getUserDetailByEmail"
+#     response = requests.get(url, params=params)
+#     data = response.json()
+#     responseCode = data["responseCode"]
+#     email = data["user"]["email"]
+#     title = data["user"]["title"]
+#     birth_day = data["user"]["birth_day"]
+#     birth_month = data["user"]["birth_month"]
+#     birth_year = data["user"]["birth_year"]
+#     first_name = data["user"]["first_name"]
+#     last_name = data["user"]["last_name"]
+#     company = data["user"]["company"]
+#     address1 = data["user"]["address1"]
+#     country = data["user"]["country"]
+#     zipcode = data["user"]["zipcode"]
+#     state = data["user"]["state"]
+#     city = data["user"]["city"]
+#     print(email,title,birth_day,birth_month,birth_year,first_name,last_name,company,address1,country,zipcode,state,city)
+#     print(response.json())
+#     assert responseCode == 200
+#     assert email == "viktoriaaaaa.f@gmail.com"
+#     assert title == "Miss"
+#     assert birth_day == "07"
+#     assert birth_month == "10"
+#     assert birth_year == "1998"
+#     assert first_name == "Viktoria"
+#     assert last_name == "Ffffff"
+#     assert company == "Wallester"
+#     assert address1 == "Kreutzwaldi 4"
+#     assert country == "Estonia"
+#     assert zipcode == "12345"
+#     assert state == "Tln"
+#     assert city == "Tallinn"
+
+
+# def test_GetNonExistUserDetails():
+#     params = {'email': 'vvvv.f@gmail.com'}
+#     url = "https://automationexercise.com/api/getUserDetailByEmail"
+#     response = requests.get(url, params=params)
+#     data = response.json()
+#     responseCode = data["responseCode"]
+#     responseMessage = data ["message"]
+#     expected_message = "Account not found with this email, try another email!"
+#     print(responseMessage, responseCode)
+#     assert responseMessage == expected_message
+#     assert responseCode == 404
+
+# def test_PostNonExistProduct():
+#     params = {'search_product': 'skirt'}
+#     url = "https://automationexercise.com/api/searchProduct"
+#     response = requests.post(url, params=params)
+#     data = response.json()
+#     responseCode = data["responseCode"]
+#     responseMessage = data["message"]
+#     expected_message = "Bad request, search_product parameter is missing in POST request."
+#     print(responseMessage,responseCode)
+#     assert responseCode == 400
+#     assert responseMessage == expected_message
+
+
+# def test_PostRegisterWithExistEmail():
+#     params = {'name': 'Viktoria1',
+#     'email': 'viktoriaaaaa.f@gmail.com',
+#     'password': 'qweqweqwe',
+#     'title': 'Miss',
+#     'birth_date': '08',
+#     'birth_month': '11',
+#     'birth_year': '1999',
+#     'firstname': 'Viktoria1',
+#     'lastname': 'Fffffff',
+#     'company': 'Wallester1',
+#     'address1': 'Kreutzwaldi 4',
+#     'address2': '',
+#     'country': 'Estonia',
+#     'zipcode': '12345',
+#     'state': 'Tln',
+#     'city': 'Tallinn',
+#     'mobile_number': '+3725848485'}
+#     url = "https://automationexercise.com/api/createAccount"
+#     response = requests.post(url, data=params)
+#     print(response.json())
+#     data = response.json()
+#     responseCode = data["responseCode"]
+#     responseMessage = data ["message"]
+#     expected_message = "Email already exists!"
+#     print(responseMessage, responseCode)
+#     assert responseMessage == expected_message
+#     assert responseCode == 400
+
+# def test_DeleteNonExistUser():
+#     params = {'email': 'vvvvv.fffff@gmail.com',
+#     'password': 'qweqweqwe'}
+#     url = "https://automationexercise.com/api/deleteAccount"
+#     response = requests.delete(url, data=params)
+#     data = response.json()
+#     responseCode = data["responseCode"]
+#     responseMessage = data["message"]
+#     expected_message = "Account not found!"
+#     print(responseMessage, responseCode)
+#     assert responseMessage == expected_message
+#     assert responseCode == 404
+
+def test_VerifyThatAllJeansHaveJeansInTheirName():
+    params = {'search_product': 'jeans'}
+    url = "https://automationexercise.com/api/searchProduct"
+    response = requests.post(url, data=params)
+    print(response.json())
     data = response.json()
     responseCode = data["responseCode"]
-    email = data["user"]["email"]
-    title = data["user"]["title"]
-    birth_day = data["user"]["birth_day"]
-    birth_month = data["user"]["birth_month"]
-    birth_year = data["user"]["birth_year"]
-    first_name = data["user"]["first_name"]
-    last_name = data["user"]["last_name"]
-    company = data["user"]["company"]
-    address1 = data["user"]["address1"]
-    country = data["user"]["country"]
-    zipcode = data["user"]["zipcode"]
-    state = data["user"]["state"]
-    city = data["user"]["city"]
-    print(email,title,birth_day,birth_month,birth_year,first_name,last_name,company,address1,country,zipcode,state,city)
-    print(response.json())
+    products = data["products"]
+    for product in products:
+        print(product["name"])
+        assert "Jeans" in product["name"]
     assert responseCode == 200
-    assert email == "viktoriaaaaa.f@gmail.com"
-    assert title == "Miss"
-    assert birth_day == "07"
-    assert birth_month == "10"
-    assert birth_year == "1998"
-    assert first_name == "Viktoria"
-    assert last_name == "Ffffff"
-    assert company == "Wallester"
-    assert address1 == "Kreutzwaldi 4"
-    assert country == "Estonia"
-    assert zipcode == "12345"
-    assert state == "Tln"
-    assert city == "Tallinn"
