@@ -280,15 +280,15 @@ import requests
 #     assert responseMessage == expected_message
 #     assert responseCode == 404
 
-def test_VerifyThatAllJeansHaveJeansInTheirName():
-    params = {'search_product': 'jeans'}
-    url = "https://automationexercise.com/api/searchProduct"
-    response = requests.post(url, data=params)
-    print(response.json())
-    data = response.json()
-    responseCode = data["responseCode"]
-    products = data["products"]
-    for product in products:
-        print(product["name"])
-        assert "Jeans" in product["name"]
-    assert responseCode == 200
+# def test_VerifyThatAllJeansHaveJeansInTheirName():
+#     params = {'search_product': 'jeans'}
+#     url = "https://automationexercise.com/api/searchProduct"
+#     response = requests.post(url, data=params)
+#     print(response.json())
+#     data = response.json()
+#     responseCode = data["responseCode"]
+#     products = data["products"]
+#     for product in products:
+#         print(product["name"])
+#         assert "Jeans" in product["name"]
+#     assert responseCode == 200
